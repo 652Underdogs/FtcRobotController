@@ -11,12 +11,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class DriveTrain extends LinearOpMode
 {
     //Drive Motors
-    private DcMotor motorFrontLeft;
-    private DcMotor motorFrontRight;
-    private DcMotor motorBackLeft;
-    private DcMotor motorBackRight;
+    private DcMotor FrontLeft;
+    private DcMotor FrontRight;
+    private DcMotor BackLeft;
+    private DcMotor BackRight;
     //Collection Servos
-    private Servo servo;
+    private Servo pivot;
     private CRServo pull;
 
     //Wobble
@@ -25,16 +25,16 @@ public class DriveTrain extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        motorFrontLeft = hardwareMap.dcMotor.get("FrontLeft");
-        motorFrontRight = hardwareMap.dcMotor.get("FrontRight");
-        motorBackLeft = hardwareMap.dcMotor.get("BackLeft");
-        motorBackRight = hardwareMap.dcMotor.get("BackRight");
+        FrontLeft = hardwareMap.dcMotor.get("FrontLeft");
+        FrontRight = hardwareMap.dcMotor.get("FrontRight");
+        BackLeft = hardwareMap.dcMotor.get("BackLeft");
+        BackRight = hardwareMap.dcMotor.get("BackRight");
 
 
-        motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
-        motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
+        BackLeft.setDirection(DcMotor.Direction.REVERSE);
+        FrontLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        servo = hardwareMap.servo.get("pivot");
+        pivot = hardwareMap.servo.get("pivot");
         pull = hardwareMap.crservo.get("pull");
         int pullPower = 0;
 
@@ -44,12 +44,12 @@ public class DriveTrain extends LinearOpMode
 
         while(opModeIsActive())
         {
-            motorFrontLeft.setPower(-gamepad1.left_stick_y);
-            motorBackLeft.setPower(-gamepad1.left_stick_y);
-            motorFrontRight.setPower(-gamepad1.right_stick_y);
-            motorBackRight.setPower(-gamepad1.right_stick_y);
+            FrontLeft.setPower(-gamepad1.left_stick_y);
+            BackLeft.setPower(-gamepad1.left_stick_y);
+            FrontRight.setPower(-gamepad1.right_stick_y);
+            BackRight.setPower(-gamepad1.right_stick_y);
 
-            servo.setPosition(0.8);
+            pivot.setPosition(0.8);
             pull.setPower(pullPower);
 
             if(gamepad1.a) {
