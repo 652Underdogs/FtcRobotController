@@ -36,6 +36,7 @@ public class DriveTrain extends LinearOpMode
 
         servo = hardwareMap.servo.get("pivot");
         pull = hardwareMap.crservo.get("pull");
+        int pullPower = 0;
 
         ClawPivot = hardwareMap.dcMotor.get("ClawPivot");
         pinch = hardwareMap.servo.get("pinch");
@@ -49,11 +50,12 @@ public class DriveTrain extends LinearOpMode
             motorBackRight.setPower(-gamepad1.right_stick_y);
 
             servo.setPosition(0.8);
+            pull.setPower(pullPower);
 
             if(gamepad1.a) {
-                pull.setPower(1);
-            } else {
-                pull.setPower(0);
+                pullPower = 1;
+            } else if (gamepad1.b){
+                pullPower = 0;
             }
 
             ClawPivot.setPower(gamepad1.left_trigger);
