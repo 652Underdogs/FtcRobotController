@@ -17,7 +17,7 @@ public class DriveTrain extends LinearOpMode
     private DcMotor motorBackRight;
     //Collection Servos
     private Servo servo;
-    private CRServo pull;
+    private DcMotor pull;
 
     //Wobble
     private DcMotor ClawPivot;
@@ -35,7 +35,7 @@ public class DriveTrain extends LinearOpMode
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
 
         servo = hardwareMap.servo.get("pivot");
-        pull = hardwareMap.crservo.get("pull");
+        pull = hardwareMap.dcMotor.get("pull");
 
         ClawPivot = hardwareMap.dcMotor.get("ClawPivot");
         pinch = hardwareMap.servo.get("pinch");
