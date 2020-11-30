@@ -18,6 +18,7 @@ public class DriveTrain extends LinearOpMode
     //Collection Servos
     private Servo servo;
     private DcMotor pull;
+    private CRServo tread;
 
     //Wobble
     private Servo ClawPivot;
@@ -41,6 +42,7 @@ public class DriveTrain extends LinearOpMode
 
         servo = hardwareMap.servo.get("pivot");
         pull = hardwareMap.dcMotor.get("pull");
+        tread = hardwareMap.crservo.get("tread");
 
         ClawPivot = hardwareMap.servo.get("ClawPivot");
         pinch = hardwareMap.servo.get("pinch");
@@ -62,17 +64,17 @@ public class DriveTrain extends LinearOpMode
             BackRight.setPower(gamepad1.right_stick_y);
 
             if(gamepad1.left_trigger < 0 || gamepad1.left_trigger > 0)  {
-                FrontLeft.setPower(-gamepad1.left_trigger);
-                FrontRight.setPower(gamepad1.left_trigger);
-                BackLeft.setPower(gamepad1.left_trigger);
-                BackRight.setPower(-gamepad1.left_trigger);
+                FrontLeft.setPower(gamepad1.left_trigger);
+                FrontRight.setPower(-gamepad1.left_trigger);
+                BackLeft.setPower(-gamepad1.left_trigger);
+                BackRight.setPower(gamepad1.left_trigger);
             }
 
             if(gamepad1.right_trigger < 0 || gamepad1.right_trigger > 0)  {
-                FrontLeft.setPower(gamepad1.right_trigger);
-                FrontRight.setPower(-gamepad1.right_trigger);
-                BackLeft.setPower(-gamepad1.right_trigger);
-                BackRight.setPower(gamepad1.right_trigger);
+                FrontLeft.setPower(-gamepad1.right_trigger);
+                FrontRight.setPower(gamepad1.right_trigger);
+                BackLeft.setPower(gamepad1.right_trigger);
+                BackRight.setPower(-gamepad1.right_trigger);
             }
 
             servo.setPosition(0.8);
@@ -110,6 +112,9 @@ public class DriveTrain extends LinearOpMode
             else {
                 LinearAct.setPower(0);
             }
+
+            tread.setPower(gamepad2.left_trigger);
+            tread.setPower(-gamepad2.right_trigger);
             idle();
         }
     }
