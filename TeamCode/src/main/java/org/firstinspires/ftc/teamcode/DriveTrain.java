@@ -87,16 +87,16 @@ public class DriveTrain extends LinearOpMode
 
             }
 
-            if(gamepad1.dpad_down) {
-                ClawPivot.setPosition(0.6);
+            if(gamepad2.dpad_down) {
+                ClawPivot.setPosition(0.85);
             }
-            else if(gamepad1.dpad_up){
+            else if(gamepad2.dpad_up){
                 ClawPivot.setPosition(0);
             }
-            if(gamepad1.left_bumper) {
+            if(gamepad2.x) {
                 pinch.setPosition(0);
             }
-            else if(gamepad1.right_bumper) {
+            else if(gamepad2.y) {
                 pinch.setPosition(1);
             }
 
