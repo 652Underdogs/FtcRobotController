@@ -16,7 +16,7 @@ public class DriveTrain extends LinearOpMode
     private DcMotor BackLeft;
     private DcMotor BackRight;
     //Collection Servos
-    private Servo servo;
+    private Servo pivot;
     private DcMotor pull;
     private CRServo tread;
 
@@ -40,7 +40,7 @@ public class DriveTrain extends LinearOpMode
         BackRight.setDirection(DcMotor.Direction.REVERSE);
         FrontRight.setDirection(DcMotor.Direction.REVERSE);
 
-        servo = hardwareMap.servo.get("pivot");
+        pivot = hardwareMap.servo.get("pivot");
         pull = hardwareMap.dcMotor.get("pull");
         tread = hardwareMap.crservo.get("tread");
 
@@ -77,7 +77,7 @@ public class DriveTrain extends LinearOpMode
                 BackRight.setPower(-gamepad1.right_trigger);
             }
 
-            servo.setPosition(0.8);
+            pivot.setPosition(0.8);
 
             if(gamepad1.a) {
                 pull.setPower(1);
