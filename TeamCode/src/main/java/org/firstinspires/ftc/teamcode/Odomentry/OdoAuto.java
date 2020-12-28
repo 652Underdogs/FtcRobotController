@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Odomentry.OdometryGlobalCoordinatePosition
 /**
  * Created by Sarthak on 10/4/2019.
  */
-@TeleOp(name = "My Odometry OpMode")
+@TeleOp(name = "OdoAuto")
 public class OdoAuto extends LinearOpMode {
     //Drive motors
     DcMotor right_front, right_back, left_front, left_back;

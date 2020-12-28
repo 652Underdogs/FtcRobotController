@@ -84,8 +84,8 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
     /**
      * Created by Sarthak on 10/4/2019.
      */
-    @TeleOp(name = "My Odometry OpMode")
-    public static class MyOdometryOpmode extends LinearOpMode {
+    @TeleOp(name = "OdoAuto")
+    public static class OdoAuto extends LinearOpMode {
         //Drive motors
         DcMotor right_front, right_back, left_front, left_back;
         //Odometry Wheels
