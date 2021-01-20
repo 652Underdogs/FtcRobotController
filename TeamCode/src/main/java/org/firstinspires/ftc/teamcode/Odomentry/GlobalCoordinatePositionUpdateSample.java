@@ -52,10 +52,10 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-        /**
-         * *****************
-         * OpMode Begins Here
-         * *****************
+        /*
+          *****************
+          OpMode Begins Here
+          *****************
          */
 
         //Create and start GlobalCoordinatePosition thread to constantly update the global coordinate positions\
@@ -84,8 +84,8 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
     /**
      * Created by Sarthak on 10/4/2019.
      */
-    @TeleOp(name = "OdoAuto")
-    public static class OdoAuto extends LinearOpMode {
+    @TeleOp(name = "ODum")
+    public static class Odum extends LinearOpMode {
         //Drive motors
         DcMotor right_front, right_back, left_front, left_back;
         //Odometry Wheels
@@ -94,7 +94,7 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
         final double COUNTS_PER_INCH = 307.699557;
 
         //Hardware Map Names for drive motors and odometry wheels. THIS WILL CHANGE ON EACH ROBOT, YOU NEED TO UPDATE THESE VALUES ACCORDINGLY
-        String rfName = "rf", rbName = "rb", lfName = "lf", lbName = "lb";
+        String rfName = "FrontRight", rbName = "BackRight", lfName = "FrontLeft", lbName = "BackLeft";
         String verticalLeftEncoderName = rbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
 
         OdometryGlobalCoordinatePosition globalPositionUpdate;
