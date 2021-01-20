@@ -41,16 +41,14 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @TeleOp
 public class EasyOpenCVExample extends LinearOpMode
 {
-    WebcamName webcamName = hardwareMap.get(WebcamName.class, "cam");
     OpenCvWebcam webCam;
     SkystoneDeterminationPipeline pipeline;
 
     @Override
     public void runOpMode()
     {
-
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        webCam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
+        webCam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "cam"), cameraMonitorViewId);
         pipeline = new SkystoneDeterminationPipeline();
         webCam.setPipeline(pipeline);
 
