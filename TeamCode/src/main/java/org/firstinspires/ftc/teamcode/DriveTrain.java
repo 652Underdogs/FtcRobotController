@@ -21,8 +21,8 @@ public class DriveTrain extends LinearOpMode
     private CRServo tread;
 
     //Wobble
-    private Servo ClawPivot;
-    private CRServo pinch;
+    private CRServo ClawPivot;
+    private Servo pinch;
 
     //Distribution
     private DcMotor LeftBlue;
@@ -44,8 +44,8 @@ public class DriveTrain extends LinearOpMode
         pull = hardwareMap.dcMotor.get("pull");
         tread = hardwareMap.crservo.get("tread");
 
-        ClawPivot = hardwareMap.servo.get("ClawPivot");
-        pinch = hardwareMap.crservo.get("pinch");
+        ClawPivot = hardwareMap.crservo.get("ClawPivot");
+        pinch = hardwareMap.servo.get("pinch");
 
 
         LeftBlue = hardwareMap.dcMotor.get("LeftBlue");
@@ -87,20 +87,21 @@ public class DriveTrain extends LinearOpMode
             }
 
             if(gamepad2.dpad_down) {
-                ClawPivot.setPosition(1);
+                ClawPivot.setPower(1);
             }
             else if(gamepad2.dpad_up){
-                ClawPivot.setPosition(0);
-            }
-            if(gamepad2.x) {
-                pinch.setPower(-1);
-            }
-            else if(gamepad2.y) {
-                pinch.setPower(1);
+                ClawPivot.setPower(-1);
             }
             else {
-                pinch.setPower(0);
+                ClawPivot.setPower(0);
             }
+            if(gamepad2.x) {
+                pinch.setPosition(0);
+            }
+            else if(gamepad2.y) {
+                pinch.setPosition(1);
+            }
+
 
             if(gamepad2.left_trigger == 1){
                 LeftBlue.setPower(1);
