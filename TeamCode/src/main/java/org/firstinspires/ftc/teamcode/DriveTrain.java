@@ -8,8 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "DriveTrain")
-public class DriveTrain extends LinearOpMode
-{
+public class DriveTrain extends LinearOpMode {
     //Drive Motors
     private DcMotor FrontLeft;
     private DcMotor FrontRight;
@@ -28,9 +27,9 @@ public class DriveTrain extends LinearOpMode
     private DcMotor LeftBlue;
     private DcMotor RightBlue;
     private DcMotor LinearAct;
+
     @Override
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         FrontLeft = hardwareMap.dcMotor.get("FrontLeft");
         FrontRight = hardwareMap.dcMotor.get("FrontRight");
         BackLeft = hardwareMap.dcMotor.get("BackLeft");
@@ -55,94 +54,83 @@ public class DriveTrain extends LinearOpMode
         RightBlue.setDirection((DcMotor.Direction.REVERSE));
         waitForStart();
 
-        while(opModeIsActive())
-        {
+        while (opModeIsActive()) {
             FrontLeft.setPower(gamepad1.left_stick_y);
             BackLeft.setPower(gamepad1.left_stick_y);
             FrontRight.setPower(gamepad1.right_stick_y);
             BackRight.setPower(gamepad1.right_stick_y);
 
-            if(gamepad1.left_trigger < 0 || gamepad1.left_trigger > 0)  {
+            if (gamepad1.left_trigger < 0 || gamepad1.left_trigger > 0) {
                 FrontLeft.setPower(gamepad1.left_trigger);
                 FrontRight.setPower(-gamepad1.left_trigger);
                 BackLeft.setPower(-gamepad1.left_trigger);
                 BackRight.setPower(gamepad1.left_trigger);
             }
 
-            if(gamepad1.right_trigger < 0 || gamepad1.right_trigger > 0)  {
+            if (gamepad1.right_trigger < 0 || gamepad1.right_trigger > 0) {
                 FrontLeft.setPower(-gamepad1.right_trigger);
                 FrontRight.setPower(gamepad1.right_trigger);
                 BackLeft.setPower(gamepad1.right_trigger);
                 BackRight.setPower(-gamepad1.right_trigger);
             }
 
-            pivot.setPosition(1);
+            //pivot.setPosition(1);
 
-            if(gamepad1.a) {
+            if (gamepad1.a) {
                 pull.setPower(1);
 
-            } else if(gamepad1.b){
+            } else if (gamepad1.b) {
                 pull.setPower(0);
 
             }
 
-            if(gamepad2.dpad_down) {
+            if (gamepad2.dpad_down) {
                 ClawPivot.setPosition(1);
-            }
-            else if(gamepad2.dpad_up){
+            } else if (gamepad2.dpad_up) {
                 ClawPivot.setPosition(0);
             }
 
-            }
-            if(gamepad2.x) {
+
+            if (gamepad2.x) {
                 pinch.setPosition(0);
-            }
-            else if(gamepad2.y) {
+            } else if (gamepad2.y) {
                 pinch.setPosition(1);
             }
 
 
-            if(gamepad2.left_trigger == 1){
+            if (gamepad2.left_trigger == 1) {
                 LeftBlue.setPower(1);
                 RightBlue.setPower(1);
-            }
-            else if(gamepad2.right_trigger == 1) {
+            } else if (gamepad2.right_trigger == 1) {
                 LeftBlue.setPower(-1);
                 RightBlue.setPower(-1);
-            }
-            else if(gamepad2.left_stick_y == 1) {
+            } else if (gamepad2.left_stick_y == 1) {
                 LeftBlue.setPower(0.1);
                 RightBlue.setPower(0.1);
-            }
-            else if(gamepad2.left_stick_y == -1) {
+            } else if (gamepad2.left_stick_y == -1) {
                 LeftBlue.setPower(-0.1);
                 RightBlue.setPower(-0.1);
-            }
-            else {
+            } else {
                 LeftBlue.setPower(0);
                 RightBlue.setPower(0);
             }
-            if(gamepad2.a) {
+            if (gamepad2.a) {
                 LinearAct.setPower(1);
-            }
-            else if(gamepad2.b){
+            } else if (gamepad2.b) {
                 LinearAct.setPower(-1);
-            }
-            else {
+            } else {
                 LinearAct.setPower(0);
             }
 
-            if(gamepad2.right_bumper) {
+            if (gamepad2.right_bumper) {
                 tread.setPower(1);
-            }
-            else if(gamepad2.left_bumper) {
+            } else if (gamepad2.left_bumper) {
                 tread.setPower(-1);
-            }
-            else {
+            } else {
                 tread.setPower(0);
             }
             idle();
         }
     }
-
+}
 
