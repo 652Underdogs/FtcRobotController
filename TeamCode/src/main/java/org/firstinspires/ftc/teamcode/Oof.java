@@ -28,13 +28,13 @@ public class Oof extends LinearOpMode {
         pinch.setDirection(Servo.Direction.REVERSE);
 
         waitForStart();
-        StrafeLeft(1, 300);
+        StrafeLeft(1, 250);
         ClawPivot.setPosition(1);
         sleep(1500);
         DriveForward(1,200);
         pinch.setPosition(1);
         sleep(500);
-        DriveForward(1,3000);
+        DriveForward(1,2500);
         pinch.setPosition(0);
         sleep(500);
         DriveBackwards(1,1000);
