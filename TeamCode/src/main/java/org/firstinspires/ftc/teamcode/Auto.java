@@ -21,9 +21,11 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.opencv.core.Core;
@@ -35,20 +37,34 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Disabled
-@TeleOp
-public class EasyOpenCVExample extends LinearOpMode
+@Autonomous(name = "Auto")
+public class Auto extends LinearOpMode
 {
     OpenCvWebcam webCam;
     SkystoneDeterminationPipeline pipeline;
+    DcMotor FrontLeft, FrontRight, BackLeft, BackRight;
+    Servo ClawPivot, pinch;
 
     @Override
     public void runOpMode()
     {
+        FrontLeft = hardwareMap.dcMotor.get("FrontLeft");
+        FrontRight = hardwareMap.dcMotor.get("FrontRight");
+        BackLeft = hardwareMap.dcMotor.get("BackLeft");
+        BackRight = hardwareMap.dcMotor.get("BackRight");
+
+        BackRight.setDirection(DcMotor.Direction.REVERSE);
+        FrontRight.setDirection(DcMotor.Direction.REVERSE);
+
+        ClawPivot = hardwareMap.servo.get("ClawPivot");
+        pinch = hardwareMap.servo.get("pinch");
+
+        ClawPivot.setDirection(Servo.Direction.REVERSE);
+        pinch.setDirection(Servo.Direction.REVERSE);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webCam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "cam"), cameraMonitorViewId);
         pipeline = new SkystoneDeterminationPipeline();
@@ -70,6 +86,19 @@ public class EasyOpenCVExample extends LinearOpMode
 
         waitForStart();
 
+        if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR) {
+            StrafeLeft(1, 250);
+            ClawPivot.setPosition(1);
+            sleep(1500);
+            DriveForward(1,200);
+            pinch.setPosition(1);
+            sleep(500);
+            DriveForward(1,2500);
+            pinch.setPosition(0);
+            sleep(500);
+            DriveBackwards(1,1000);
+        }
+
         while (opModeIsActive())
         {
             telemetry.addData("Analysis", pipeline.getAnalysis());
@@ -78,6 +107,7 @@ public class EasyOpenCVExample extends LinearOpMode
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
+
         }
     }
 
@@ -183,5 +213,49 @@ public class EasyOpenCVExample extends LinearOpMode
         {
             return avg1;
         }
+    }
+    public void DriveForward(double power,long sleep) {
+        FrontLeft.setPower(power);
+        FrontRight.setPower(power);
+        BackLeft.setPower(power);
+        BackRight.setPower(power);
+        sleep(sleep);
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+    }
+    public void DriveBackwards(double power, long sleep) {
+        FrontLeft.setPower(-power);
+        FrontRight.setPower(-power);
+        BackLeft.setPower(-power);
+        BackRight.setPower(-power);
+        sleep(sleep);
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+    }
+    public void StrafeLeft(double power, long sleep) {
+        FrontLeft.setPower(power);
+        FrontRight.setPower(-power);
+        BackLeft.setPower(-power);
+        BackRight.setPower(power);
+        sleep(sleep);
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+    }
+    public void StrafeRight(double power, long sleep) {
+        FrontLeft.setPower(-power);
+        FrontRight.setPower(power);
+        BackLeft.setPower(power);
+        BackRight.setPower(-power);
+        sleep(sleep);
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
     }
 }
