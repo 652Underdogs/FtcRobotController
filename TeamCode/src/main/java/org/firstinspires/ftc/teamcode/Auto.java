@@ -24,6 +24,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -45,8 +46,9 @@ public class Auto extends LinearOpMode
 {
     OpenCvWebcam webCam;
     SkystoneDeterminationPipeline pipeline;
-    DcMotor FrontLeft, FrontRight, BackLeft, BackRight;
+    DcMotor FrontLeft, FrontRight, BackLeft, BackRight, LeftBlue, RightBlue;
     Servo ClawPivot, pinch;
+    CRServo tread;
 
     @Override
     public void runOpMode()
@@ -61,9 +63,15 @@ public class Auto extends LinearOpMode
 
         ClawPivot = hardwareMap.servo.get("ClawPivot");
         pinch = hardwareMap.servo.get("pinch");
+        tread = hardwareMap.crservo.get("tread");
 
         ClawPivot.setDirection(Servo.Direction.REVERSE);
         pinch.setDirection(Servo.Direction.REVERSE);
+
+        LeftBlue = hardwareMap.dcMotor.get("LeftBlue");
+        RightBlue = hardwareMap.dcMotor.get("RightBlue");
+
+        RightBlue.setDirection((DcMotor.Direction.REVERSE));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webCam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "cam"), cameraMonitorViewId);
@@ -86,18 +94,66 @@ public class Auto extends LinearOpMode
 
         waitForStart();
 
+        sleep(1000);
         if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR) {
-            StrafeLeft(1, 250);
-            ClawPivot.setPosition(1);
+            StrafeLeft(1, 260);
+            ClawPivot.setPosition(0.8);
             sleep(1500);
             DriveForward(1,200);
+            sleep(1000);
             pinch.setPosition(1);
             sleep(500);
-            DriveForward(1,2500);
+            StrafeLeft(1,350);
+            DriveForward(1,2300);
             pinch.setPosition(0);
-            sleep(500);
-            DriveBackwards(1,1000);
+            sleep(1000);
+            DriveBackwards(1,1350);
+            StrafeRight(1,300);
+            shoot();
+            DriveForward(1, 150);
+            stop();
         }
+        else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.ONE) {
+
+            StrafeLeft(1, 260);
+            ClawPivot.setPosition(0.8);
+            sleep(1500);
+            DriveForward(1,200);
+            sleep(1000);
+            pinch.setPosition(1);
+            sleep(500);
+            DriveForward(1,1800);
+            StrafeRight(1,600);
+            pinch.setPosition(0);
+            sleep(1000);
+            DriveBackwards(1,700);
+            StrafeLeft(1,500);
+            shoot();
+            DriveForward(1,300);
+            stop();
+
+        }
+
+        else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.NONE) {
+            StrafeLeft(1, 260);
+            ClawPivot.setPosition(0.8);
+            sleep(1500);
+            DriveForward(1,200);
+            sleep(1000);
+            pinch.setPosition(1);
+            sleep(500);
+            StrafeLeft(1,350);
+            DriveForward(1,1300);
+            pinch.setPosition(0);
+            sleep(1000);
+            DriveBackwards(1,450);
+            StrafeRight(1,300);
+            shoot();
+            DriveForward(1, 300);
+            stop();
+
+        }
+
 
         while (opModeIsActive())
         {
@@ -138,7 +194,7 @@ public class Auto extends LinearOpMode
         static final int REGION_HEIGHT = 35;
 
         final int FOUR_RING_THRESHOLD = 145;
-        final int ONE_RING_THRESHOLD = 125;
+        final int ONE_RING_THRESHOLD = 128;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
@@ -257,5 +313,16 @@ public class Auto extends LinearOpMode
         FrontRight.setPower(0);
         BackLeft.setPower(0);
         BackRight.setPower(0);
+    }
+    public void shoot() {
+        RightBlue.setPower(1);
+        LeftBlue.setPower(1);
+        sleep(2000);
+        tread.setPower(1);
+        sleep(3000);
+        RightBlue.setPower(0);
+        LeftBlue.setPower(0);
+        tread.setPower(0);
+        sleep(500);
     }
 }

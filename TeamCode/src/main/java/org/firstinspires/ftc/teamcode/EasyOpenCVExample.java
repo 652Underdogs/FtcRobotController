@@ -39,7 +39,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Disabled
+
 @TeleOp
 public class EasyOpenCVExample extends LinearOpMode
 {
@@ -108,7 +108,7 @@ public class EasyOpenCVExample extends LinearOpMode
         static final int REGION_HEIGHT = 35;
 
         final int FOUR_RING_THRESHOLD = 145;
-        final int ONE_RING_THRESHOLD = 125;
+        final int ONE_RING_THRESHOLD = 128;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
