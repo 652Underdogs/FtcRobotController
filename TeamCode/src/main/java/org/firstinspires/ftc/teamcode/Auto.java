@@ -103,8 +103,8 @@ public class Auto extends LinearOpMode
             sleep(1000);
             pinch.setPosition(1);
             sleep(500);
-            StrafeLeft(1,350);
-            DriveForward(1,2300);
+            StrafeLeft(1,290);
+            DriveForward(1,2275);
             pinch.setPosition(0);
             sleep(1000);
             DriveBackwards(1,1350);
@@ -126,10 +126,10 @@ public class Auto extends LinearOpMode
             StrafeRight(1,600);
             pinch.setPosition(0);
             sleep(1000);
-            DriveBackwards(1,700);
-            StrafeLeft(1,500);
+            DriveBackwards(1,725);
+            StrafeLeft(1,550);
             shoot();
-            DriveForward(1,300);
+            DriveForward(1,100);
             stop();
 
         }
