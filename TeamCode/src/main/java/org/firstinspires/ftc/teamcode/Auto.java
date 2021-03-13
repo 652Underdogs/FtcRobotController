@@ -97,14 +97,18 @@ public class Auto extends LinearOpMode
         sleep(1000);
         if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR) {
             StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.8);
+            ClawPivot.setPosition(0.5);
             sleep(1500);
             DriveForward(1,200);
             sleep(1000);
             pinch.setPosition(1);
             sleep(500);
-            StrafeLeft(1,290);
+            ClawPivot.setPosition(1);
+            sleep(1000);
+            StrafeLeft(1,270);
             DriveForward(1,2275);
+            ClawPivot.setPosition(0.5);
+            sleep(1000);
             pinch.setPosition(0);
             sleep(1000);
             DriveBackwards(1,1350);
@@ -116,34 +120,41 @@ public class Auto extends LinearOpMode
         else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.ONE) {
 
             StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.8);
+            ClawPivot.setPosition(0.5);
             sleep(1500);
             DriveForward(1,200);
             sleep(1000);
             pinch.setPosition(1);
             sleep(500);
-            DriveForward(1,1800);
-            StrafeRight(1,600);
+            ClawPivot.setPosition(1);
+            sleep(1000);
+            DriveForward(1,1650);
+            StrafeRight(1,450);
+            ClawPivot.setPosition(0.5);
+            sleep(1000);
             pinch.setPosition(0);
             sleep(1000);
-            DriveBackwards(1,725);
-            StrafeLeft(1,550);
+            DriveBackwards(1,750);
+            StrafeLeft(1,500);
             shoot();
-            DriveForward(1,100);
+            DriveForward(1,250);
             stop();
 
         }
 
         else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.NONE) {
             StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.8);
+            ClawPivot.setPosition(0.5);
             sleep(1500);
             DriveForward(1,200);
             sleep(1000);
             pinch.setPosition(1);
             sleep(500);
+            ClawPivot.setPosition(1);
             StrafeLeft(1,350);
-            DriveForward(1,1300);
+            DriveForward(1,1150);
+            ClawPivot.setPosition(0.5);
+            sleep(1000);
             pinch.setPosition(0);
             sleep(1000);
             DriveBackwards(1,450);

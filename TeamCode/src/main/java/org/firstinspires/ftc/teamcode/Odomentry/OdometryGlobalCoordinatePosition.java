@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * Created by Sarthak on 6/1/2019.
  */
-@Disabled
+
 public class OdometryGlobalCoordinatePosition implements Runnable{
     //Odometry wheels
     private DcMotor verticalEncoderLeft, verticalEncoderRight, horizontalEncoder;
