@@ -23,7 +23,7 @@ public class OdoAuto extends LinearOpMode {
 
     //Hardware Map Names for drive motors and odometry wheels. THIS WILL CHANGE ON EACH ROBOT, YOU NEED TO UPDATE THESE VALUES ACCORDINGLY
     String rfName = "FrontRight", rbName = "BackRight", lfName = "FrontLeft", lbName = "BackLeft";
-    String verticalLeftEncoderName = rbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
+    String verticalLeftEncoderName = "BackRight", verticalRightEncoderName = "FrontLeft", horizontalEncoderName = "FrontRight";
 
     OdometryGlobalCoordinatePosition globalPositionUpdate;
 

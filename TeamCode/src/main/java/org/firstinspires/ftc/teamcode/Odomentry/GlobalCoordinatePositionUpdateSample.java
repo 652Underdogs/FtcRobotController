@@ -21,7 +21,7 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
     final double COUNTS_PER_INCH = 307.699557;
 
     //Hardware map names for the encoder wheels. Again, these will change for each robot and need to be updated below
-    String verticalLeftEncoderName = "FrontRight", verticalRightEncoderName = "FrontLeft", horizontalEncoderName = "BackLeft";
+    String verticalLeftEncoderName = "BackRight", verticalRightEncoderName = "FrontLeft", horizontalEncoderName = "FrontLeft";
 
     @Override
     public void runOpMode() throws InterruptedException {
