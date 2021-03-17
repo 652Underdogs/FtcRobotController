@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Odomentry.OdometryGlobalCoordinatePosition
 /**
  * Created by Sarthak on 10/4/2019.
  */
-@Disabled
+
 @TeleOp(name = "OdoAuto")
 public class OdoAuto extends LinearOpMode {
     //Drive motors
@@ -43,6 +43,8 @@ public class OdoAuto extends LinearOpMode {
 
         globalPositionUpdate.reverseRightEncoder();
         globalPositionUpdate.reverseNormalEncoder();
+
+        goToPosition(3,3,1,0,1);
 
         while(opModeIsActive()){
             //Display Global (x, y, theta) coordinates
@@ -79,10 +81,7 @@ public class OdoAuto extends LinearOpMode {
             double robot_movement_y_component = calculateY(robotMovementAngle, robotPower);
             double pivotCorrection = desiredRobotOrientation - globalPositionUpdate.returnOrientation();
 //Check This
-            verticalLeft.setPower(robot_movement_y_component);
-            verticalRight.setPower(robot_movement_y_component);
-            horizontal.setPower(robot_movement_x_component);
-            horizontal.setPower(pivotCorrection);
+
         }
 
     }

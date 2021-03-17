@@ -47,8 +47,8 @@ public class Auto extends LinearOpMode
     OpenCvWebcam webCam;
     SkystoneDeterminationPipeline pipeline;
     DcMotor FrontLeft, FrontRight, BackLeft, BackRight, LeftBlue, RightBlue;
-    Servo ClawPivot, pinch;
-    CRServo tread;
+    Servo pinch;
+    CRServo tread, ClawPivot;
 
     @Override
     public void runOpMode()
@@ -61,11 +61,11 @@ public class Auto extends LinearOpMode
         BackRight.setDirection(DcMotor.Direction.REVERSE);
         FrontRight.setDirection(DcMotor.Direction.REVERSE);
 
-        ClawPivot = hardwareMap.servo.get("ClawPivot");
+        ClawPivot = hardwareMap.crservo.get("ClawPivot");
         pinch = hardwareMap.servo.get("pinch");
         tread = hardwareMap.crservo.get("tread");
 
-        ClawPivot.setDirection(Servo.Direction.REVERSE);
+        ClawPivot.setDirection(CRServo.Direction.REVERSE);
         pinch.setDirection(Servo.Direction.REVERSE);
 
         LeftBlue = hardwareMap.dcMotor.get("LeftBlue");
@@ -92,24 +92,20 @@ public class Auto extends LinearOpMode
             }
         });
 
+        pinch.setPosition(1);
+
         waitForStart();
 
         sleep(1000);
         if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.FOUR) {
-            StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.5);
-            sleep(1500);
-            DriveForward(1,200);
-            sleep(1000);
-            pinch.setPosition(1);
-            sleep(500);
-            ClawPivot.setPosition(1);
-            sleep(1000);
-            StrafeLeft(1,270);
-            DriveForward(1,2275);
-            ClawPivot.setPosition(0.5);
+            StrafeLeft(1, 660);
+            DriveForward(1,2600);
+            ClawPivot.setPower(1);
             sleep(1000);
             pinch.setPosition(0);
+            ClawPivot.setPower(0);
+            sleep(1000);
+            ClawPivot.setPower(0);
             sleep(1000);
             DriveBackwards(1,1350);
             StrafeRight(1,300);
@@ -120,19 +116,12 @@ public class Auto extends LinearOpMode
         else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.ONE) {
 
             StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.5);
-            sleep(1500);
-            DriveForward(1,200);
-            sleep(1000);
-            pinch.setPosition(1);
-            sleep(500);
-            ClawPivot.setPosition(1);
-            sleep(1000);
-            DriveForward(1,1650);
+            DriveForward(1,1950);
             StrafeRight(1,450);
-            ClawPivot.setPosition(0.5);
+            ClawPivot.setPower(1);
             sleep(1000);
             pinch.setPosition(0);
+            ClawPivot.setPower(0);
             sleep(1000);
             DriveBackwards(1,750);
             StrafeLeft(1,500);
@@ -143,21 +132,16 @@ public class Auto extends LinearOpMode
         }
 
         else if(pipeline.position == SkystoneDeterminationPipeline.RingPosition.NONE) {
-            StrafeLeft(1, 260);
-            ClawPivot.setPosition(0.5);
-            sleep(1500);
-            DriveForward(1,200);
-            sleep(1000);
-            pinch.setPosition(1);
             sleep(500);
-            ClawPivot.setPosition(1);
-            StrafeLeft(1,350);
-            DriveForward(1,1150);
-            ClawPivot.setPosition(0.5);
+            StrafeLeft(1, 610);
+            DriveForward(1,1450);
+            sleep(100);
+            ClawPivot.setPower(1);
             sleep(1000);
             pinch.setPosition(0);
+            ClawPivot.setPower(0);
             sleep(1000);
-            DriveBackwards(1,450);
+            DriveBackwards(1,350);
             StrafeRight(1,300);
             shoot();
             DriveForward(1, 300);

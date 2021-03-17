@@ -74,7 +74,12 @@ public class DriveTrain extends LinearOpMode {
                 BackRight.setPower(-gamepad1.right_trigger);
             }
 
-            pivot.setPosition(0.65);
+            if(gamepad1.a){
+                pivot.setPosition(0);
+            }
+            else {
+                pivot.setPosition(1);
+            }
 
             if (gamepad1.right_bumper) {
                 pull.setPower(1);
@@ -82,6 +87,8 @@ public class DriveTrain extends LinearOpMode {
             } else if (gamepad1.left_bumper) {
                 pull.setPower(0);
 
+            } else if(gamepad1.y) {
+                pull.setPower(-1);
             }
 
             if (gamepad2.dpad_up) {
