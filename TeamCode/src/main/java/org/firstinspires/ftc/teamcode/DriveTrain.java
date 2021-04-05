@@ -78,7 +78,7 @@ public class DriveTrain extends LinearOpMode {
                 pivot.setPosition(0);
             }
             else {
-                pivot.setPosition(1);
+                pivot.setPosition(0.85);
             }
 
             if (gamepad1.right_bumper) {
