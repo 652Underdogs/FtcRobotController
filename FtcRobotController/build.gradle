@@ -23,10 +23,13 @@ android {
 
 repositories {
     maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
+    maven {
+        url = 'https://maven.brott.dev/'
 
-    flatDir {
-        dirs '../libs'
+        flatDir {
+            dirs '../libs'
+        }
     }
-}
 
-apply from: 'build.release.gradle'
+    apply from: 'build.release.gradle'
+}
